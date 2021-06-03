@@ -1,24 +1,54 @@
-// INIT storage.js
-const storage = new Storage()
-let city = storage.getLastLocation().city
-console.log(city)
+// initialize storage
+const storage = new Storage();
 
-// FETCH CURRENT LOCATION WEATHER DATA ON LOAD
-document.addEventListener('DOMContentLoaded', getWeatherData)
+// get stored weather
+const weatherLocation = storage.getLastLocation();
 
-// GET USER INPUT
-const form = document.querySelector('form#w-form');
-const input = document.querySelector('input#city');
+// initialize weather object
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    city = input.value;
-    
-    getData(city)
+const weather = new Weather(weatherLocation.city, weatherLocation.country);
 
-    // MAKE THE MODAL CLOSE ON SAVE CHANGES(WHEN THE FORM IS SUBMITTED) with jquery.
-    $('#exampleModal').modal('hide')
+//initialize UI
+const ui = new UI();
 
-    // STORE LAST CITY TO LOCAL STORAGE
-    storage.setLastLocation(city);
-})
+document.addEventListener("DOMContentLoaded", getWeather);
+
+// Change location event
+document.querySelector("#save-btn").addEventListener("click", (e) => {
+  const city = document.querySelector("#city").value;
+  const country = document.querySelector("#country").value;
+
+  weather.changeLocation(city, country);
+
+  // set location
+  storage.setLastLocation(city, country);
+
+  getWeather();
+
+  $("#locModal").modal("hide");
+});
+
+function save(e) {
+  if (e.key === "Enter") {
+    const city = document.querySelector("#city").value;
+    const country = document.querySelector("#country").value;
+
+    weather.changeLocation(city, country);
+
+    // set location
+    storage.setLastLocation(city, country);
+
+    getWeather();
+
+    $("#locModal").modal("hide");
+  }
+}
+
+function getWeather() {
+  weather
+    .getWeather()
+    .then((results) => {
+      ui.paint(results);
+    })
+    .catch((err) => console.log(err));
+}

@@ -1,36 +1,22 @@
-const apiKey = 'cb73d54fd3c69e4f08d471af29d67fa5';
+class Weather {
+  constructor(city, country) {
+    this.apiKey = "a7e2efc703cf47d89cd130932212105";
+    this.city = city;
+    this.country = country;
+  }
 
-function getWeatherData() {
-// CHECK IF NAVIGATOR (BROWSER) SUPPORTS GEOLOCATION
-    if('geolocation' in navigator){
-        navigator.geolocation.getCurrentPosition(setPosition, (err) => console.error(err))
+  //Fetch weather from API
 
-        const getWeather = (latitude, longitude) => {
-            let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
-            async function getLocalWeather(){
-                let res = await fetch(api)
-                let data = await res.json();
-                addWeatherProps(data)
-            }
-            getLocalWeather()
-        }
+  async getWeather() {
+    const response = await fetch(
+      `https://api.weatherapi.com/v1/current.json?key=${this.apiKey}&q=${this.city}&q=${this.country}&aqi=no`
+    );
+    const responseData = await response.json();
+    return responseData;
+  }
 
-        function setPosition({ coords }){
-            let latitude = coords.latitude;
-            let longitude = coords.longitude;
-        
-            getWeather(latitude, longitude)
-        }
-    }else{
-        getData(city)
-        console.log('fetch last city')
-    }
-}
-
-// FETCH DATA USING CITY INSTEAD OF GEOLOCATION
-async function getData(city) {
-    const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
-    const res = await fetch(api);
-    let data = await res.json();
-    addWeatherProps(data)
+  changeLocation(city, country) {
+    this.city = city;
+    this.country = country;
+  }
 }

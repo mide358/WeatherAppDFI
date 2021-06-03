@@ -1,48 +1,30 @@
 // SELECT NECESSARY ELEMENTS
+class UI {
+  constructor() {
+    this.location = document.querySelector("#location");
+    this.temp = document.querySelector("#temperature");
 
-const tempValue = document.querySelector('#temperature');
-const locationEl = document.querySelectorAll('.location');
-const time = document.querySelector('#time p');
-const weatherIcon = document.querySelector('#weather-img');
-const weatherDescription = document.querySelector('#description p');
-const humidityEl = document.querySelector('#humidity')
-const feelsLike = document.querySelector('#feels-like')
-const windEl = document.querySelector('#wind');
-const lonEl = document.querySelector('#lon');
-const latEl = document.querySelector('#lat');
+    this.time = document.querySelector("#time");
+    this.icon = document.querySelector("#weather-img");
+    this.desc = document.querySelector("#description");
+    this.humidity = document.querySelector("#humidity");
+    this.feelsLike = document.querySelector("#feels-like");
+    this.wind = document.querySelector("#wind");
+    this.latlon = document.querySelector("#latlon");
+    this.locRight = document.querySelector("#location-right");
+  }
 
-const kelvin = 273;
-const weather = {};
-// GET COUNTRY NAMES FROM THEIR CODES
-let regionNames = new Intl.DisplayNames(['en'], { type: 'region'});
+  paint(weather) {
+    this.location.textContent = `${weather.location.name}`;
+    this.temp.textContent = `${weather.current.temp_c}°c(${weather.current.temp_f}°f)`;
 
-const populateUi = () => {
-    const { humidity, feels_like, wind, lon, lat, locate, temperature, main, description, icon } = weather;
-
-        tempValue.innerHTML = temperature
-        locationEl.forEach(el => el.innerHTML = locate);
-        weatherIcon.setAttribute('src', `icons/${icon}.png`);
-        weatherDescription.innerHTML = description;
-        humidityEl.innerHTML = humidity;
-        lonEl.innerHTML = lon;
-        latEl.innerHTML = lat;
-        windEl.innerHTML = wind;
-        feelsLike.innerHTML = feels_like;
-}
-
-const addWeatherProps = (data) => {
-    let countryName = regionNames.of(data.sys.country)
-    weather.locate = `${data.name}, ${countryName}`;
-    weather.temperature = Math.floor(data.main.temp - kelvin);
-    weather.humidity = data.main.humidity;
-    weather.feels_like = Math.floor(data.main.feels_like - kelvin);
-    weather.wind = data.wind.speed;
-    weather.lon = Math.floor(data.coord.lon);
-    weather.lat = Math.floor(data.coord.lat);
-    weather.main = data.weather[0].main
-    weather.description = data.weather[0].description
-    weather.icon = data.weather[0].icon;
-
-      // POPULATE THE UI WITH THE DATA RETURNED
-      populateUi()
+    this.desc.textContent = weather.current.condition.text;
+    this.icon.setAttribute("src", weather.current.condition.icon);
+    this.locRight.textContent = `Location: ${weather.location.name}, ${weather.location.country}`;
+    this.humidity.textContent = `Humidity: ${weather.current.humidity}%`;
+    this.time.textContent = `Time: ${weather.location.localtime}`;
+    this.feelsLike.textContent = `Feels like: ${weather.current.feelslike_c}°C (${weather.current.feelslike_f}°F)`;
+    this.wind.textContent = `Wind: ${weather.current.wind_mph}`;
+    this.latlon.textContent = `Lat: ${weather.location.lat} & Lon: ${weather.location.lon} `;
+  }
 }
