@@ -86,7 +86,7 @@ body {
   color: black;
 }
 
-/* styling for small screens */
+/* styling for small screens  with max width 450px*/
 @media (max-width: 450px) {
   .left {
     height: 55vh;
