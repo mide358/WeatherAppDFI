@@ -14,7 +14,7 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  overflow: hidden;
+  overflow: auto;
   color: white;
 }
 
@@ -40,14 +40,17 @@ body {
   margin-top: 1.1rem;
   font-size: 1.5rem;
 }
-
+.day h3 {
+  top: 55% !important;
+  text-align: center;
+  font-size: 1.2rem;
+}
 #location {
-  margin-top: 1rem;
-  font-size: 1.8rem;
-  margin-left: 15px;
+  display: none;
 }
 #time {
-  font-size: 0.7rem;
+  font-size: 1rem;
+  padding-top: 22px;
 }
 
 #description {
@@ -62,10 +65,11 @@ body {
 #w-details {
   margin-top: 10rem;
   color: white;
-  width: 20rem;
+  width: 18rem !important;
+  padding: 13px;
   line-height: 3rem;
   list-style: none;
-  border: 1px solid white;
+  border: 1px solid rgb(119, 119, 66);
   border-radius: 4px;
 }
 #loc-btn {
@@ -86,28 +90,47 @@ body {
 @media (max-width: 450px) {
   .left {
     height: 55vh;
-    padding-top: 3%;
+    padding-top: 0;
+  }
+  .right {
+    margin-top: -10px;
+    height: 40vh;
   }
 
   .weather {
     display: block;
+
+    height: 13rem;
+    width: 13rem;
   }
   #temperature {
-    display: inline-block;
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-align: center;
   }
 
+  #description {
+    display: inline-block;
+  }
   #location {
-    font-size: 1.4rem;
+    display: block;
+    font-size: 0.8rem;
     text-align: center;
+    margin-bottom: 2px;
   }
   #time {
+    margin-top: 2px;
+    margin-bottom: 5px;
     text-align: center;
+    font-size: 0.9rem;
+    padding-top: 2px;
+  }
+  .day h3 {
+    font-size: 1.1rem;
   }
   .img {
-    justify-self: center;
+    text-align: center;
     padding: 0;
+    /* margin-top: -10px; */
   }
   #weather-img img {
     height: 80px;
@@ -123,7 +146,11 @@ body {
     line-height: 2.5rem;
     background-color: rgba(79, 80, 82, 0.4);
   }
+  li {
+    font-size: 0.8rem !important;
+  }
   #loc-btn {
+    margin-bottom: 10px;
     font-size: 1rem;
     padding: 5px;
   }
@@ -133,20 +160,31 @@ body {
   .left {
     height: 45vh;
     padding-top: 0;
-    padding-bottom: 20%;
+    margin-bottom: 20%;
   }
 
   #temperature {
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-align: center;
+    padding-bottom: 2px;
   }
 
   #location {
-    font-size: 1.4rem;
+    margin-top: 10px;
+    display: block;
+    font-size: 0.8rem;
     text-align: center;
+    margin-bottom: 0;
   }
-  #time p {
+  #time {
     text-align: center;
+    font-size: 0.8rem;
+    margin-bottom: 0;
+    margin-top: 1px;
+  }
+
+  .day h3 {
+    font-size: 1.2rem;
   }
 
   #location-right {
@@ -159,6 +197,7 @@ body {
     margin-top: 0;
   }
   #loc-btn {
+    margin-bottom: 1rem;
     font-size: 1rem;
     padding: 5px;
   }
@@ -175,7 +214,11 @@ body {
     font-size: 1.5rem;
     margin-left: 10px;
   }
+  #location-right {
+    font-size: 1.2rem;
+  }
   #w-details {
+    margin-top: 4rem;
     width: 15rem;
   }
 }

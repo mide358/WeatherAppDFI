@@ -15,6 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="styles.css" />
     <title>Weather App</title>
   </head>
@@ -22,8 +23,12 @@
     <div class="row mx-auto">
       <!-- left side on large screen -->
       <div class="col-md-7 left">
+        <div class="day pt-3">
+          <h3 id="date"></h3>
+        </div>
+
         <div class="row weather mx-auto mt-5">
-          <div class="col-4 mx-auto">
+          <div class="col mx-auto pt-2">
             <h2 id="temperature"></h2>
           </div>
           <div class="col mx-auto">
@@ -31,15 +36,15 @@
               <h3 id="location"></h3>
             </div>
             <div class="col mx-auto">
-              <p id="time"><sub> </sub></p>
+              <p id="time"></p>
             </div>
           </div>
-          <div class="col-4 img mx-auto">
+          <div class="col img mx-auto">
             <div class="col">
               <img id="weather-img" />
             </div>
             <div class="col">
-              <p id="description"><sub></sub></p>
+              <p id="description"></p>
             </div>
           </div>
         </div>
@@ -147,6 +152,7 @@
       integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
       crossorigin="anonymous"
     ></script>
+
     <script src="storage.js"></script>
     <script src="ui.js"></script>
     <script src="weather.js"></script>
